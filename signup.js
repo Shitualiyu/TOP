@@ -27,9 +27,20 @@ signupBtn.addEventListener("click", async () => {
     }
 
     try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert("Account created successfully!");
-        window.location.href = "login.html";
+        const userCredential =
+await createUserWithEmailAndPassword(auth, email, password);
+
+await setDoc(doc(db, "users", userCredential.user.uid), {
+    fullname: document.getElementById("fullname").value.trim(),
+    email: email,
+    balance: 0,
+    referralBonus: 0,
+    createdAt: new Date().toISOString()
+});
+
+alert("Account created successfully!");
+
+window.location.href = "login.html";
     } catch (error) {
         alert(error.message);
     }
