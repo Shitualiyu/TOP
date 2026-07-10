@@ -1,8 +1,14 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
+
 import {
   createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+import {
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  
 const signupBtn = document.getElementById("signupBtn");
 
 signupBtn.addEventListener("click", async () => {
