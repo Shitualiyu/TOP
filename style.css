@@ -380,3 +380,25 @@ font-weight:bold;
     align-items:center;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
+.top-header{
+    background:linear-gradient(135deg,#4f7cff,#2d7cff);
+    color:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom-left-radius:25px;
+    border-bottom-right-radius:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:32px;
+    font-weight:bold;
+}
+
+.header-icons{
+    display:flex;
+    gap:20px;
+    font-size:24px;
+}
