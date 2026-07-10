@@ -14,9 +14,15 @@ onAuthStateChanged(auth, async (user) => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-        document.getElementById("welcomeUser").innerText =
-            "Welcome, " + docSnap.data().fullname + " 👋";
-    }
+   if (docSnap.exists()) {
 
+    const data = docSnap.data();
+
+    document.getElementById("welcomeUser").innerText =
+        "Welcome, " + data.fullname + " 👋";
+
+    document.getElementById("balance").innerText =
+        "₦" + Number(data.balance).toLocaleString();
+
+}
 });
