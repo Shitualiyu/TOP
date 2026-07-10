@@ -447,3 +447,22 @@ font-weight:bold;
     font-size:18px;
     font-weight:bold;
 }
+.deposit-btn{
+    background:#ffffff;
+    color:#2d7cff;
+}
+
+.withdraw-btn{
+    background:#ff5757;
+    color:white;
+}
+
+.balance-buttons button{
+    border-radius:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.balance-buttons button:hover{
+    transform:scale(1.05);
+}
