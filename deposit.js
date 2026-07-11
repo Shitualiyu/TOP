@@ -20,13 +20,13 @@ document.getElementById("depositBtn").addEventListener("click", async () => {
     }
 
     await addDoc(collection(db, "depositRequests"), {
-        userId: user.uid,
-        amount: amount,
-        method: method,
-        status: "Pending",
-        createdAt: new Date().toISOString()
-    });
-
+    userId: user.uid,
+    email: user.email,
+    amount: amount,
+    method: method,
+    status: "Pending",
+    createdAt: new Date().toISOString()
+});
     document.getElementById("status").innerText =
         "✅ Deposit request submitted successfully!";
 });
