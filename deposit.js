@@ -1,6 +1,7 @@
 import { auth, db } from "./firebase.js";
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+alert("New deposit.js loaded");
 document.getElementById("depositBtn").addEventListener("click", async () => {
 
     try {
