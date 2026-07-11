@@ -115,6 +115,58 @@ onAuthStateChanged(auth, async (user) => {
 
     withdrawSnapshot.forEach((document) => {
 
+        document.querySelectorAll(".withdrawApproveBtn").forEach((button) => {
+
+    button.addEventListener("click", async () => {
+
+        const id = button.dataset.id;
+
+        const withdrawRef = doc(db, "withdrawRequests", id);
+        const withdrawSnap = await getDoc(withdrawRef);
+
+        if (!withdrawSnap.exists()) {
+            alert("Withdrawal not found.");
+            return;
+        }
+
+        const withdrawData = withdrawSnap.data();
+
+        if (withdrawData.status === "Approved") {
+            alert("Already approved.");
+            return;
+        }
+
+        const userRef = doc(db, "users", withdrawData.userId);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+            alert("User not found.");
+            return;
+        }
+
+        const userData = userSnap.data();
+
+        if (Number(userData.balance) < Number(withdrawData.amount)) {
+            alert("Insufficient balance.");
+            return;
+        }
+
+        await updateDoc(userRef, {
+            balance: Number(userData.balance) - Number(withdrawData.amount)
+        });
+
+        await updateDoc(withdrawRef, {
+            status: "Approved"
+        });
+
+        alert("Withdrawal approved and wallet updated!");
+
+        location.reload();
+
+    });
+
+});
+        
         const data = document.data();
 
         withdrawList.innerHTML += `
@@ -127,10 +179,14 @@ onAuthStateChanged(auth, async (user) => {
             <p><strong>Account Name:</strong> ${data.accountName}</p>
             <p><strong>Status:</strong> ${data.status}</p>
 
-            <button disabled>
-                Coming Soon
-            </button>
+<button
+class="withdrawApproveBtn"
+data-id="${document.id}"
+${data.status === "Approved" ? "disabled" : ""}>
 
+${data.status === "Approved" ? "Approved ✅" : "Approve"}
+
+</button>
         </div>
         `;
     });
