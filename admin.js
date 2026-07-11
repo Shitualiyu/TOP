@@ -4,9 +4,10 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/fi
 
 import {
     collection,
-    getDocs
+    getDocs,
+    doc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 const adminEmail = "aliyuashitu180@gmail.com";
 
 onAuthStateChanged(auth, async (user) => {
@@ -56,5 +57,21 @@ Reject
 </div>
 `; 
     });
+document.querySelectorAll(".approveBtn").forEach((button) => {
 
+    button.addEventListener("click", async () => {
+
+        const id = button.dataset.id;
+
+        await updateDoc(doc(db, "depositRequests", id), {
+            status: "Approved"
+        });
+
+        alert("Deposit Approved!");
+
+        location.reload();
+
+    });
+
+});
 });
