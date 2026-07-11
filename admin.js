@@ -32,8 +32,27 @@ onAuthStateChanged(auth, async (user) => {
     const depositList = document.getElementById("depositList");
     depositList.innerHTML = "<h3>Deposit Requests</h3>";
 
+    try {
+
     const depositSnapshot = await getDocs(collection(db, "depositRequests"));
 
+    depositSnapshot.forEach((document) => {
+
+        const data = document.data();
+
+        depositList.innerHTML += `
+        <div>
+            <p>${data.email}</p>
+        </div>
+        `;
+    });
+
+} catch (error) {
+
+    console.log(error);
+    alert(error.message);
+
+}
     depositSnapshot.forEach((document) => {
 
         const data = document.data();
@@ -192,13 +211,3 @@ onAuthStateChanged(auth, async (user) => {
     });
 
 });
-try {
-
-    // Put ALL your current code inside here
-
-} catch (error) {
-
-    console.error(error);
-    alert(error.message);
-
-}
