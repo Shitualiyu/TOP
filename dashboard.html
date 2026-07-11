@@ -2,300 +2,152 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP Dashboard</title>
 
-<title>TOP Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
 
+    <div class="top-bar">
+        <header class="top-header">
 
-<div class="top-bar">
+            <div class="logo">TOP</div>
 
-<header class="top-header">
+            <p id="welcomeUser">Welcome 👋</p>
 
-<div class="logo">TOP</div>
+            <div class="header-icons">
+                <span>🔔</span>
 
-<p id="welcomeUser">Welcome 👋</p>
+                <a href="profile.html" style="text-decoration:none;font-size:24px;">
+                    👤
+                </a>
+            </div>
 
-<div class="header-icons">
+        </header>
+    </div>
 
-<span>🔔</span>
+    <div class="balance-card">
 
-<a href="profile.html" style="text-decoration:none;font-size:24px;">
-👤
-</a>
+        <p>Total Balance</p>
 
-</div>
+        <h1 id="balance">₦0.00</h1>
 
-</header>
+        <div class="balance-buttons">
 
-</div>
+            <a href="deposit.html">
+                <button class="deposit-btn">Deposit</button>
+            </a>
 
+            <a href="withdraw.html">
+                <button class="withdraw-btn">Withdraw</button>
+            </a>
 
+        </div>
 
-<div class="balance-card">
+    </div>
 
-<p>Total Balance</p>
+    <div class="menu-grid">
 
-<h1 id="balance">₦0.00</h1>
+        <div class="menu-item">
+            <i>📈</i>
+            <p>Invest</p>
+        </div>
 
+        <div class="menu-item">
+            <i>👥</i>
+            <p>Team</p>
+        </div>
 
-<div class="balance-buttons">
+        <div class="menu-item">
+            <i>💳</i>
+            <p>Wallet</p>
+        </div>
 
-<a href="deposit.html">
-<button class="deposit-btn">
-Deposit
-</button>
-</a>
+        <a href="history.html" class="menu-item">
+            <i>🕒</i>
+            <p>History</p>
+        </a>
 
+        <a href="profile.html" class="menu-item">
+            <i>👤</i>
+            <p>Profile</p>
+        </a>
 
-<a href="withdraw.html">
-<button class="withdraw-btn">
-Withdraw
-</button>
-</a>
+        <div class="menu-item">
+            <i>🎧</i>
+            <p>Support</p>
+        </div>
 
-</div>
+    </div>
 
+    <div class="plans">
 
-</div>
+        <h2>Investment Plans</h2>
 
+        <div class="plan-card">
+            <h3>Starter Plan</h3>
+            <p>Investment: ₦5,000</p>
+            <p>Daily Income: ₦500</p>
+            <button class="btn">Invest Now</button>
+        </div>
 
+        <div class="plan-card">
+            <h3>Silver Plan</h3>
+            <p>Investment: ₦10,000</p>
+            <p>Daily Income: ₦1,100</p>
+            <button class="btn">Invest Now</button>
+        </div>
 
+        <div class="plan-card">
+            <h3>Gold Plan</h3>
+            <p>Investment: ₦20,000</p>
+            <p>Daily Income: ₦2,500</p>
+            <button class="btn">Invest Now</button>
+        </div>
 
-<div class="menu-grid">
+    </div>
 
+    <div class="referral-card">
 
-<div class="menu-item">
-<i>📈</i>
-<p>Invest</p>
-</div>
+        <h2>Referral Bonus</h2>
 
+        <p>
+            Invite your friends and earn
+            <strong>₦1,000</strong>
+            for every successful referral.
+        </p>
 
-<div class="menu-item">
-<i>👥</i>
-<p>Team</p>
-</div>
+        <button class="btn">Copy Referral Link</button>
 
+    </div>
 
-<div class="menu-item">
-<i>💳</i>
-<p>Wallet</p>
-</div>
+    <div class="bottom-nav">
 
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            <p>Home</p>
+        </div>
 
-<a href="history.html" class="menu-item">
-<i>🕒</i>
-<p>History</p>
-</a>
+        <div class="nav-item">
+            <i class="fas fa-chart-pie"></i>
+            <p>Plans</p>
+        </div>
 
-<a href="profile.html" class="menu-item">
+        <div class="nav-item">
+            <i class="fas fa-user"></i>
+            <p>Account</p>
+        </div>
 
-<i>👤</i>
+    </div>
 
-<p>Profile</p>
-
-</a>
-
-
-<div class="menu-item">
-
-<i>🎧</i>
-
-<p>Support</p>
-
-</div>
-
-
-</div>
-
-
-
-
-<div class="plans">
-
-
-<h2>Investment Plans</h2>
-
-
-<div class="plan-card">
-
-<h3>Starter Plan</h3>
-
-<p>Investment: ₦5,000</p>
-
-<p>Daily Income: ₦500</p>
-
-<button class="btn">
-Invest Now
-</button>
-
-</div>
-
-
-
-<div class="plan-card">
-
-<h3>Silver Plan</h3>
-
-<p>Investment: ₦10,000</p>
-
-<p>Daily Income: ₦1,100</p>
-
-<button class="btn">
-Invest Now
-</button>
-
-</div>
-
-
-
-
-<div class="plan-card">
-
-<h3>Gold Plan</h3>
-
-<p>Investment: ₦20,000</p>
-
-<p>Daily Income: ₦2,500</p>
-
-<button class="btn">
-Invest Now
-</button>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="referral-card">
-
-<h2>Referral Bonus</h2>
-
-<p>
-Invite your friends and earn
-<strong>₦1,000</strong>
-for every successful referral.
-</p>
-
-
-<button class="btn">
-Copy Referral Link
-</button>
-
-
-</div>
-
-
-
-
-
-<div class="transactions">
-
-
-<h2>Recent Transactions</h2>
-
-
-<div class="transaction">
-
-<span>Deposit</span>
-
-<strong>+₦10,000</strong>
-
-</div>
-
-
-
-<div class="transaction">
-
-<span>Investment</span>
-
-<strong>-₦5,000</strong>
-
-</div>
-
-
-
-<div class="transaction">
-
-<span>Daily Profit</span>
-
-<strong>+₦500</strong>
-
-</div>
-
-
-
-<div class="transaction">
-
-<span>Withdrawal</span>
-
-<strong>-₦2,000</strong>
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="bottom-nav">
-
-
-<div class="nav-item active">
-
-<i class="fas fa-home"></i>
-
-<p>Home</p>
-
-</div>
-
-
-
-<div class="nav-item">
-
-<i class="fas fa-chart-pie"></i>
-
-<p>Plans</p>
-
-</div>
-
-
-
-<div class="nav-item">
-
-<i class="fas fa-user"></i>
-
-<p>Account</p>
-
-</div>
-
-
-
-</div>
-
-
-
-
-<script type="module" src="firebase.js"></script>
-
-<script type="module" src="dashboard.js"></script>
-
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="dashboard.js"></script>
 
 </body>
 
