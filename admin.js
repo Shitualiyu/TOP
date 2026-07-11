@@ -192,3 +192,13 @@ onAuthStateChanged(auth, async (user) => {
     });
 
 });
+try {
+
+    // Put ALL your current code inside here
+
+} catch (error) {
+
+    console.error(error);
+    alert(error.message);
+
+}
