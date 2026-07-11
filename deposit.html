@@ -38,8 +38,21 @@ TQExampleWalletAddress123456789
     <option>Bank Transfer</option>
     <option>USDT (TRC20)</option>
 </select>
+<label>Transaction Reference</label>
 
-<button id="depositBtn">Submit Deposit</button>
+<input
+type="text"
+id="reference"
+placeholder="Enter transaction reference">
+<label>Payment Receipt</label>
+
+<input
+type="file"
+id="receipt"
+accept="image/*">
+    <button id="depositBtn">
+Submit Deposit Request
+</button>
 <p id="status"></p>
 
 </div>
