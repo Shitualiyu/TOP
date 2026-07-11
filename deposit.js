@@ -20,17 +20,19 @@ document.getElementById("depositBtn").addEventListener("click", async () => {
             return;
         }
 
-        await addDoc(collection(db, "depositRequests"), {
-            userId: user.uid,
-            email: user.email,
-            amount: amount,
-            method: method,
-            status: "Pending",
-            createdAt: new Date().toISOString()
-        });
+        const docRef = await addDoc(collection(db, "depositRequests"), {
+    userId: user.uid,
+    email: user.email,
+    amount: amount,
+    method: method,
+    status: "Pending",
+    createdAt: new Date().toISOString()
+});
 
-        document.getElementById("status").innerText =
-            "✅ Deposit request submitted successfully!";
+alert("Deposit saved! Document ID: " + docRef.id);
+
+document.getElementById("status").innerText =
+    "✅ Deposit request submitted successfully!";
 
     } catch (error) {
         alert(error.message);
