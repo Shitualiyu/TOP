@@ -42,10 +42,12 @@ querySnapshot.forEach((document) => {
     <p><strong>Method:</strong> ${data.method}</p>
     <p><strong>Status:</strong> ${data.status}</p>
 
-    <button class="approveBtn" data-id="${document.id}">
-    Approve
-    </button>
-
+    <button
+class="approveBtn"
+data-id="${document.id}"
+${data.status === "Approved" ? "disabled" : ""}>
+${data.status === "Approved" ? "Approved ✅" : "Approve"}
+</button>
     <button class="rejectBtn" data-id="${document.id}">
     Reject
     </button>
@@ -59,6 +61,20 @@ document.querySelectorAll(".approveBtn").forEach((button) => {
 
         const id = button.dataset.id;
 
+const depositRef = doc(db, "depositRequests", id);
+const depositSnap = await getDoc(depositRef);
+
+if (!depositSnap.exists()) {
+    alert("Deposit not found.");
+    return;
+}
+
+const depositData = depositSnap.data();
+
+if (depositData.status === "Approved") {
+    alert("This deposit has already been approved.");
+    return;
+}
 // Get the deposit request
 const depositRef = doc(db, "depositRequests", id);
 const depositSnap = await getDoc(depositRef);
