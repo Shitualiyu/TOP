@@ -75,6 +75,17 @@ if (depositData.status === "Approved") {
     alert("This deposit has already been approved.");
     return;
 }
+if (!depositSnap.exists()) {
+    alert("Deposit not found.");
+    return;
+}
+
+const depositData = depositSnap.data();
+
+if (depositData.status === "Approved") {
+    alert("This deposit has already been approved.");
+    return;
+}
 // Get the deposit request
 const depositRef = doc(db, "depositRequests", id);
 const depositSnap = await getDoc(depositRef);
