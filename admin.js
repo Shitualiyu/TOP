@@ -57,6 +57,39 @@ ${data.status === "Approved" ? "Approved ✅" : "Approve"}
 });
 document.querySelectorAll(".approveBtn").forEach((button) => {
 
+    const withdrawList = document.getElementById("withdrawList");
+
+withdrawList.innerHTML = "";
+
+const withdrawSnapshot = await getDocs(collection(db, "withdrawRequests"));
+
+withdrawSnapshot.forEach((document) => {
+
+    const data = document.data();
+
+    withdrawList.innerHTML += `
+    <div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
+
+    <p><strong>Email:</strong> ${data.email}</p>
+
+    <p><strong>Amount:</strong> ₦${data.amount}</p>
+
+    <p><strong>Bank:</strong> ${data.bank}</p>
+
+    <p><strong>Account No:</strong> ${data.accountNumber}</p>
+
+    <p><strong>Account Name:</strong> ${data.accountName}</p>
+
+    <p><strong>Status:</strong> ${data.status}</p>
+
+    <button class="withdrawApproveBtn" data-id="${document.id}">
+        Approve
+    </button>
+
+    </div>
+    `;
+});
+    
     button.addEventListener("click", async () => {
 
         const id = button.dataset.id;
