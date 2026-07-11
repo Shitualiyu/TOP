@@ -28,24 +28,33 @@ onAuthStateChanged(auth, async (user) => {
 
     const querySnapshot = await getDocs(collection(db, "depositRequests"));
 
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((document) => {
 if (doc.data().status === "Approved") {
     // We'll disable the button later
 }
-        const data = doc.data();
+        const data = document.data();
 
-        depositList.innerHTML += `
-            <div style="border:1px solid #ccc;padding:10px;margin:10px 0;border-radius:8px;">
-                <p><strong>Email:</strong> ${data.email}</p>
-                <p><strong>Amount:</strong> ₦${data.amount}</p>
-                <p><strong>Method:</strong> ${data.method}</p>
-                <p><strong>Status:</strong> ${data.status}</p>
+       depositList.innerHTML += `
+<div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
 
-<button class="approveBtn" data-id="${doc.id}">
-    Approve
+<p><strong>Email:</strong> ${data.email}</p>
+
+<p><strong>Amount:</strong> ₦${data.amount}</p>
+
+<p><strong>Method:</strong> ${data.method}</p>
+
+<p><strong>Status:</strong> ${data.status}</p>
+
+<button class="approveBtn" data-id="${document.id}">
+Approve
 </button>
-            </div>
-        `;
+
+<button class="rejectBtn" data-id="${document.id}">
+Reject
+</button>
+
+</div>
+`; 
     });
 
 });
