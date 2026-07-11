@@ -9,6 +9,7 @@ import {
     updateDoc,
     getDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 const adminEmail = "aliyuashitu180@gmail.com";
 
 onAuthStateChanged(auth, async (user) => {
@@ -24,142 +25,114 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
-    const depositList = document.getElementById("depositList");
+    // ==========================
+    // Deposit Requests
+    // ==========================
 
+    const depositList = document.getElementById("depositList");
     depositList.innerHTML = "<h3>Deposit Requests</h3>";
 
-    const querySnapshot = await getDocs(collection(db, "depositRequests"));
+    const depositSnapshot = await getDocs(collection(db, "depositRequests"));
 
-querySnapshot.forEach((document) => {
+    depositSnapshot.forEach((document) => {
 
-    const data = document.data();
+        const data = document.data();
 
-    depositList.innerHTML += `
-    <div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
+        depositList.innerHTML += `
+        <div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
 
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Amount:</strong> ₦${data.amount}</p>
-    <p><strong>Method:</strong> ${data.method}</p>
-    <p><strong>Status:</strong> ${data.status}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Amount:</strong> ₦${data.amount}</p>
+            <p><strong>Method:</strong> ${data.method}</p>
+            <p><strong>Status:</strong> ${data.status}</p>
 
-    <button
-class="approveBtn"
-data-id="${document.id}"
-${data.status === "Approved" ? "disabled" : ""}>
-${data.status === "Approved" ? "Approved ✅" : "Approve"}
-</button>
-    <button class="rejectBtn" data-id="${document.id}">
-    Reject
-    </button>
+            <button
+                class="approveBtn"
+                data-id="${document.id}"
+                ${data.status === "Approved" ? "disabled" : ""}>
+                ${data.status === "Approved" ? "Approved ✅" : "Approve"}
+            </button>
 
-    </div>
-    `;
-});
-document.querySelectorAll(".approveBtn").forEach((button) => {
+        </div>
+        `;
+    });
+
+    document.querySelectorAll(".approveBtn").forEach((button) => {
+
+        button.addEventListener("click", async () => {
+
+            const id = button.dataset.id;
+
+            const depositRef = doc(db, "depositRequests", id);
+            const depositSnap = await getDoc(depositRef);
+
+            if (!depositSnap.exists()) {
+                alert("Deposit not found.");
+                return;
+            }
+
+            const depositData = depositSnap.data();
+
+            if (depositData.status === "Approved") {
+                alert("Already approved.");
+                return;
+            }
+
+            await updateDoc(depositRef, {
+                status: "Approved"
+            });
+
+            const userRef = doc(db, "users", depositData.userId);
+            const userSnap = await getDoc(userRef);
+
+            if (userSnap.exists()) {
+
+                const userData = userSnap.data();
+
+                await updateDoc(userRef, {
+                    balance: Number(userData.balance) + Number(depositData.amount)
+                });
+
+            }
+
+            alert("Deposit approved and wallet updated!");
+
+            location.reload();
+
+        });
+
+    });
+
+    // ==========================
+    // Withdrawal Requests
+    // ==========================
 
     const withdrawList = document.getElementById("withdrawList");
 
-withdrawList.innerHTML = "";
+    withdrawList.innerHTML = "<h3>Withdrawal Requests</h3>";
 
-const withdrawSnapshot = await getDocs(collection(db, "withdrawRequests"));
+    const withdrawSnapshot = await getDocs(collection(db, "withdrawRequests"));
 
-withdrawSnapshot.forEach((document) => {
+    withdrawSnapshot.forEach((document) => {
 
-    const data = document.data();
+        const data = document.data();
 
-    withdrawList.innerHTML += `
-    <div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
+        withdrawList.innerHTML += `
+        <div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
 
-    <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Amount:</strong> ₦${data.amount}</p>
+            <p><strong>Bank:</strong> ${data.bank}</p>
+            <p><strong>Account No:</strong> ${data.accountNumber}</p>
+            <p><strong>Account Name:</strong> ${data.accountName}</p>
+            <p><strong>Status:</strong> ${data.status}</p>
 
-    <p><strong>Amount:</strong> ₦${data.amount}</p>
+            <button disabled>
+                Coming Soon
+            </button>
 
-    <p><strong>Bank:</strong> ${data.bank}</p>
-
-    <p><strong>Account No:</strong> ${data.accountNumber}</p>
-
-    <p><strong>Account Name:</strong> ${data.accountName}</p>
-
-    <p><strong>Status:</strong> ${data.status}</p>
-
-    <button class="withdrawApproveBtn" data-id="${document.id}">
-        Approve
-    </button>
-
-    </div>
-    `;
-});
-    
-    button.addEventListener("click", async () => {
-
-        const id = button.dataset.id;
-
-const depositRef = doc(db, "depositRequests", id);
-const depositSnap = await getDoc(depositRef);
-
-if (!depositSnap.exists()) {
-    alert("Deposit not found.");
-    return;
-}
-
-const depositData = depositSnap.data();
-
-if (depositData.status === "Approved") {
-    alert("This deposit has already been approved.");
-    return;
-}
-if (!depositSnap.exists()) {
-    alert("Deposit not found.");
-    return;
-}
-
-const depositData = depositSnap.data();
-
-if (depositData.status === "Approved") {
-    alert("This deposit has already been approved.");
-    return;
-}
-// Get the deposit request
-const depositRef = doc(db, "depositRequests", id);
-const depositSnap = await getDoc(depositRef);
-
-if (!depositSnap.exists()) {
-    alert("Deposit not found!");
-    return;
-}
-
-const depositData = depositSnap.data();
-
-// Prevent approving twice
-if (depositData.status === "Approved") {
-    alert("This deposit has already been approved.");
-    return;
-}
-
-// Update deposit status
-await updateDoc(depositRef, {
-    status: "Approved"
-});
-
-// Update user balance
-const userRef = doc(db, "users", depositData.userId);
-const userSnap = await getDoc(userRef);
-
-if (userSnap.exists()) {
-
-    const userData = userSnap.data();
-
-    await updateDoc(userRef, {
-        balance: Number(userData.balance) + Number(depositData.amount)
+        </div>
+        `;
     });
 
-}
-
-alert("Deposit approved and wallet updated!");
-
-location.reload();
-
-    });
-
-});
 });
