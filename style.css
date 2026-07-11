@@ -5,9 +5,12 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
-body{
-    background:#f3f7ff;
-    color:#222;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fc;
+    color: #222;
 }
 
 .header{
@@ -380,18 +383,14 @@ font-weight:bold;
     align-items:center;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
-.top-header{
-    background:linear-gradient(135deg,#4f7cff,#2d7cff);
-    color:white;
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom-left-radius:25px;
-    border-bottom-right-radius:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0d6efd;
+    color: white;
+    padding: 15px 20px;
 }
-
 .logo{
     font-size:32px;
     font-weight:bold;
@@ -402,15 +401,15 @@ font-weight:bold;
     gap:20px;
     font-size:24px;
 }
-.balance-card{
-    background:linear-gradient(135deg,#4f7cff,#2d7cff);
-    color:white;
-    margin:20px;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
+.balance-card {
+    background: linear-gradient(135deg, #0d6efd, #3b82f6);
+    color: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
-
 .balance-card p{
     opacity:.9;
     margin-bottom:10px;
@@ -447,14 +446,31 @@ font-weight:bold;
     font-size:18px;
     font-weight:bold;
 }
-.deposit-btn{
-    background:#ffffff;
-    color:#2d7cff;
+.deposit-btn,
+.withdraw-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
+    transition: 0.3s;
 }
 
-.withdraw-btn{
-    background:#ff5757;
-    color:white;
+.deposit-btn {
+    background: #28a745;
+    color: white;
+}
+
+.withdraw-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.deposit-btn:hover,
+.withdraw-btn:hover {
+    transform: scale(1.05);
 }
 
 .balance-buttons button{
