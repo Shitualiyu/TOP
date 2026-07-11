@@ -6,7 +6,8 @@ import {
     collection,
     getDocs,
     doc,
-    updateDoc
+    updateDoc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 const adminEmail = "aliyuashitu180@gmail.com";
 
@@ -58,13 +59,45 @@ document.querySelectorAll(".approveBtn").forEach((button) => {
 
         const id = button.dataset.id;
 
-        await updateDoc(doc(db, "depositRequests", id), {
-            status: "Approved"
-        });
+// Get the deposit request
+const depositRef = doc(db, "depositRequests", id);
+const depositSnap = await getDoc(depositRef);
 
-        alert("Deposit Approved!");
+if (!depositSnap.exists()) {
+    alert("Deposit not found!");
+    return;
+}
 
-        location.reload();
+const depositData = depositSnap.data();
+
+// Prevent approving twice
+if (depositData.status === "Approved") {
+    alert("This deposit has already been approved.");
+    return;
+}
+
+// Update deposit status
+await updateDoc(depositRef, {
+    status: "Approved"
+});
+
+// Update user balance
+const userRef = doc(db, "users", depositData.userId);
+const userSnap = await getDoc(userRef);
+
+if (userSnap.exists()) {
+
+    const userData = userSnap.data();
+
+    await updateDoc(userRef, {
+        balance: Number(userData.balance) + Number(depositData.amount)
+    });
+
+}
+
+alert("Deposit approved and wallet updated!");
+
+location.reload();
 
     });
 
