@@ -29,7 +29,9 @@ onAuthStateChanged(auth, async (user) => {
     const querySnapshot = await getDocs(collection(db, "depositRequests"));
 
     querySnapshot.forEach((doc) => {
-
+if (doc.data().status === "Approved") {
+    // We'll disable the button later
+}
         const data = doc.data();
 
         depositList.innerHTML += `
@@ -38,6 +40,10 @@ onAuthStateChanged(auth, async (user) => {
                 <p><strong>Amount:</strong> ₦${data.amount}</p>
                 <p><strong>Method:</strong> ${data.method}</p>
                 <p><strong>Status:</strong> ${data.status}</p>
+
+<button class="approveBtn" data-id="${doc.id}">
+    Approve
+</button>
             </div>
         `;
     });
