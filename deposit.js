@@ -1,3 +1,4 @@
+alert("deposit.js loaded");
 import { auth, db } from "./firebase.js";
 
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
