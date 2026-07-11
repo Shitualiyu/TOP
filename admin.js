@@ -60,7 +60,7 @@ onAuthStateChanged(auth, async (user) => {
     document.querySelectorAll(".approveBtn").forEach((button) => {
 
         button.addEventListener("click", async () => {
-
+        button.disabled = true;
             const id = button.dataset.id;
 
             const depositRef = doc(db, "depositRequests", id);
@@ -154,7 +154,7 @@ onAuthStateChanged(auth, async (user) => {
             const withdrawData = withdrawSnap.data();
 
             if (withdrawData.status === "Approved") {
-                alert("Already approved.");
+                alert("This withdrawal has already been approved.");
                 return;
             }
 
@@ -180,6 +180,8 @@ onAuthStateChanged(auth, async (user) => {
             await updateDoc(withdrawRef, {
                 status: "Approved"
             });
+            button.innerText = "Approved ✅";
+            button.disabled = true;
 
             alert("Withdrawal approved and wallet updated!");
 
