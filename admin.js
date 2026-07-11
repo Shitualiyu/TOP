@@ -30,11 +30,15 @@ onAuthStateChanged(auth, async (user) => {
     const querySnapshot = await getDocs(collection(db, "depositRequests"));
 
     querySnapshot.forEach((document) => {
-if (doc.data().status === "Approved") {
-    // We'll disable the button later
-}
-        const data = document.data();
 
+    const data = document.data();
+
+    
+
+    depositList.innerHTML += `
+    ...
+    `;
+});
        depositList.innerHTML += `
 <div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
 
