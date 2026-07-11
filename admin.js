@@ -29,38 +29,29 @@ onAuthStateChanged(auth, async (user) => {
 
     const querySnapshot = await getDocs(collection(db, "depositRequests"));
 
-    querySnapshot.forEach((document) => {
+querySnapshot.forEach((document) => {
 
     const data = document.data();
 
-    
-
     depositList.innerHTML += `
-    ...
+    <div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
+
+    <p><strong>Email:</strong> ${data.email}</p>
+    <p><strong>Amount:</strong> ₦${data.amount}</p>
+    <p><strong>Method:</strong> ${data.method}</p>
+    <p><strong>Status:</strong> ${data.status}</p>
+
+    <button class="approveBtn" data-id="${document.id}">
+    Approve
+    </button>
+
+    <button class="rejectBtn" data-id="${document.id}">
+    Reject
+    </button>
+
+    </div>
     `;
 });
-       depositList.innerHTML += `
-<div style="border:1px solid #ddd;padding:15px;margin:15px 0;border-radius:10px;">
-
-<p><strong>Email:</strong> ${data.email}</p>
-
-<p><strong>Amount:</strong> ₦${data.amount}</p>
-
-<p><strong>Method:</strong> ${data.method}</p>
-
-<p><strong>Status:</strong> ${data.status}</p>
-
-<button class="approveBtn" data-id="${document.id}">
-Approve
-</button>
-
-<button class="rejectBtn" data-id="${document.id}">
-Reject
-</button>
-
-</div>
-`; 
-    });
 document.querySelectorAll(".approveBtn").forEach((button) => {
 
     button.addEventListener("click", async () => {
